@@ -1,4 +1,6 @@
 @import './normalize.scss';
-@import 'variables/base';
+@import 'variables/variables';
 @import 'variables/colors';
 @import 'variables/typography';
+@import './layout.scss';
+@import 'variables/base';

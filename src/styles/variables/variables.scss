@@ -1,0 +1,78 @@
+
+/* Color */
+$blue-1: #E7F1FC;
+$blue-2: #8BBDF3;
+$blue-3: #2E89EA;
+$blue-4: #005BBD;
+$blue-5: #003369;
+
+$green-1: #F2F8F0;
+$green-2: #C1E0B7;
+$green-3: #90C87D;
+$green-4: #639A50;
+$green-5: #37562D;
+
+
+$red-1: #FCE9E8;
+$red-2: #F2958F;
+$red-3: #E84136;
+$red-4: #BA1309;
+$red-5: #680B05;
+
+$yellow-1: #FFF7ED;
+$yellow-2: #FFD7A8;
+$yellow-3: #FFB862;
+$yellow-4: #D18B35;
+$yellow-5: #744D1E;
+
+$white: #ffffff;
+$grey-1: #EBEDEF;
+$grey-2: #D7DBDF;
+$grey-3: #B0B7BF;
+$grey-4: #89949F;
+$grey-5: #62707F;
+$black: #000000;
+
+$font-family: 'Muli', sans-serif;
+
+$box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.05), 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+$mobile: 576px;
+$mobile-large: 577px;
+$tablet: 768px;
+$desktop: 992px;
+$widescreen: 1200px;
+$fullhd: 1440px;
+
+$gap: 32px;
+
+$rule: 1.4;
+
+@mixin media($bp) {
+  @if $bp == xxl {
+    @media only screen and (min-width: $fullhd) {
+      @content;
+    }
+  } @else if $bp == xl {
+    @media only screen and (min-width: $widescreen) {
+      @content;
+    }
+  } @else if $bp == lg {
+    @media only screen and (min-width: $desktop) {
+      @content;
+    }
+  } @else if $bp == md {
+    @media only screen and (min-width: $tablet) {
+      @content;
+    }
+  } @else if $bp == sm {
+    @media only screen and (min-width: $mobile) {
+      @content;
+    }
+  }
+  @else if $bp == xs {
+    @media only screen and (min-width: 420px) {
+      @content;
+    }
+  }
+}

@@ -57,18 +57,18 @@
 }
 
 $spaces:
-  "0" "0px",
-  "2" "2px",
-  "4" "4px",
-  "6" "6px",
-  "8" "8px",
-  "10" "10px",
-  "12" "12px",
-  "16" "16px",
-  "20" "20px",
-  "24" "24px",
-  "28" "28px",
-  "32" "32px";
+  "0" 0px,
+  "2" 2px,
+  "4" 4px,
+  "6" 6px,
+  "8" 8px,
+  "10" 10px,
+  "12" 12px,
+  "16" 16px,
+  "20" 20px,
+  "24" 24px,
+  "28" 28px,
+  "32" 32px;
 
 @each $key, $value in $spaces {
   .p-#{$key} {
@@ -130,3 +130,19 @@ $spaces:
     margin-left: $value;
   }
 };
+
+.mw-1 {
+  max-width: 320px;
+}
+.mw-2 {
+  max-width: 540px;
+}
+.mw-3 {
+  max-width: 720px;
+}
+.mw-4 {
+  max-width: 960px;
+}
+.mw-5 {
+  max-width: 1140px;
+}
