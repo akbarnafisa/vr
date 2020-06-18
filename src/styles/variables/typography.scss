@@ -1,0 +1,74 @@
+// body {
+//   font-family: @font-family-base !important;
+// }
+
+.title, .body, .caption {
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+}
+
+.title {
+  font-family: 'Muli', sans-serif;
+  font-weight: 700;
+  color: black;
+}
+
+.caption, .body {
+  font-family: 'Muli', sans-serif;
+  font-weight: normal;
+  color: grey;
+}
+
+.title {
+  &-24 {
+    font-size: 24px;
+    line-height: 1.34;
+  }
+  &-22 {
+    font-size: 22px;
+    line-height: 1.34;
+  }
+  &-20 {
+    font-size: 20px;
+    line-height: 1.34;
+  }
+  &-18 {
+    font-size: 18px;
+    line-height: 1.34;
+  }
+}
+
+.body {
+  &-18 {
+    font-size: 18px;
+    line-height: 1.34;
+  }
+
+  &-16 {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  &-14 {
+    font-size: 14px;
+    line-height: 1.29;
+  }
+}
+
+.caption {
+  &-12 {
+    font-size: 12px;
+    @line-height: 1.34;
+  }
+
+  &-10 {
+    font-size: 10px;
+    @line-height: 1.34;
+  }
+
+  &-8 {
+    font-size: 8px;
+    line-height: 1.34;
+  }
+}

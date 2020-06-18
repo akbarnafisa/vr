@@ -17,5 +17,9 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '@/scss/base.scss';
+#app {
+  img {
+    width: 100px;
+  }
+}
 </style>
