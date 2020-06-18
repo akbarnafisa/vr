@@ -4,3 +4,10 @@
 @import 'variables/typography';
 @import './layout.scss';
 @import 'variables/base';
+
+#app {
+  background: $grey-1;
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 32px;
+}
