@@ -24,6 +24,11 @@ Vue.use(VueRouter)
     path: '/dialog',
     name: 'Dialog',
     component: () => import(/* webpackChunkName: "about" */ '../views/DialogPage.vue')
+  },
+  {
+    path: '/card',
+    name: 'Card',
+    component: () => import(/* webpackChunkName: "about" */ '../views/CardPage.vue')
   }
 ]
 
