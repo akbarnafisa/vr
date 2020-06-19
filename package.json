@@ -5,7 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test:setup-vr-init": "rm -rf test/vr/reff-images && mkdir test/vr/reff-images",
+    "test:vr-init": "npm run test:setup-vr-init && node test/vr/vr-init.js",
+    "test:setup-vr-test": "rm -rf vr-report",
+    "test:vr-test":  "npm run test:setup-vr-test && node test/vr/vr-test.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -22,6 +26,9 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
+    "pixelmatch": "^5.2.0",
+    "pngjs": "^5.0.0",
+    "puppeteer": "^4.0.0",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-scss-base": "^0.2.2",
     "vue-template-compiler": "^2.6.11"
