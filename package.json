@@ -9,9 +9,10 @@
     "test:setup-vr-init": "rm -rf test/vr/reff-images && mkdir test/vr/reff-images",
     "test:vr-init": "npm run test:setup-vr-init && node test/vr/vr-init.js",
     "test:setup-vr-test": "rm -rf vr-report",
-    "test:vr-test":  "npm run test:setup-vr-test && node test/vr/vr-test.js"
+    "test:vr-test": "npm run test:setup-vr-test && node test/vr/vr-test.js"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "core-js": "^3.6.5",
     "style-resources-loader": "^1.3.3",
     "vue": "^2.6.11",

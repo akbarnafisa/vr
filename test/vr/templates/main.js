@@ -6,7 +6,7 @@ scrubbersWindow.forEach(scrubberWindow => {
 
   scrubberWindow.addEventListener('mousemove', () => {
     const minWidthEl = 0
-    const maxWidthEl = 400
+    const maxWidthEl = 600
     let windowChangeSize = scrubberWindow.getClientRects()
     let x = event.pageX - windowChangeSize[0].x;
     if (x < minWidthEl) {

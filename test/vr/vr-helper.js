@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const puppeteer = require('puppeteer')
 const pixelmatch = require('pixelmatch')
+const chalk = require('chalk')
 const PNG = require('pngjs').PNG
 
 const template = ({ totalTest, passedTest, render }) => {
@@ -49,7 +50,9 @@ module.exports = class VisualRegression {
     this.reffPath = reffPath || null
     this.fixedFilename = null
     this.threshold = threshold || 0.05
+    this.initViewport = null
   }
+
   async init () {
     // init puppeteer browser
     this.browser = await puppeteer.launch()
@@ -57,6 +60,7 @@ module.exports = class VisualRegression {
   }
   async setViewport (viewport) {
     // set page view port
+    this.initViewport = viewport
     await this.page.setViewport(viewport)
   }
   setOutputPath (path) {
@@ -65,8 +69,52 @@ module.exports = class VisualRegression {
   setFilename (name) {
     this.fixedFilename = name
   }
+  setUrlList (urlList) {
+    this.urlList = urlList.flatMap(url => {
+      const options = url.options || {}
+      const viewport = options.viewport || []
+      if (viewport.length === 0) return url
+
+      let _url = []
+      let counter = 0
+      while (counter < viewport.length) {
+        const { width, height } = viewport[counter]
+        _url.push({
+          ...url,
+          filename: `${url.filename}-${width}x${height}`,
+          options: {
+            ...url.options,
+            viewport: viewport[counter],
+          }
+        })
+        counter += 1
+      }
+      return [..._url]
+    })
+  }
   async screenshot () {
-    const capture = async () => {
+    console.log(chalk.black.bgGreen.bold('VR Test Screenshot'))
+    const capture = async (info = {}, option = {}) => {
+      const {filename, outputPath, url} = info
+      const { timeout, viewport } = option
+      // apply the option viewport
+      if (viewport) {
+        await this.page.setViewport(viewport)
+      } else {
+        this.page.setViewport(this.initViewport)
+      }
+      await this.page.goto(`${this.host}/${url}`)
+      // apply the option timeout
+      if (timeout) {
+        await this.sleep(timeout)
+      }
+      const path = `${outputPath}/${filename}.png`
+      // screenshot the page
+      await this.page.screenshot({
+        path: path,
+      })
+    }
+    const setupScreenshot = async () => {
       let counter = 0
       const len = this.urlList.length
       while (counter < len) {
@@ -75,29 +123,21 @@ module.exports = class VisualRegression {
         const outputPath = this.compareMode ? `${this.outputPath}/assets/${currentUrl.filename}` :  this.outputPath
         const url = currentUrl.url
         const option = currentUrl.options
-        const { timeout } = option ? option : {}
-
         // open url
-        await this.page.goto(`${this.host}/${url}`)
-
-        // set timeout it's declared on option
-        timeout ? await this.sleep(timeout) : null
-
-        const path = `${outputPath}/${filename}.png`
-        // screenshot the page
-        await this.page.screenshot({
-          path: path,
-          fullPage: true
-        })
+        console.log(`    ${chalk.green('√')} ${currentUrl.filename}`)
+        await capture({filename, outputPath, url}, option)
         counter += 1
       }
     }
-    await capture()
+    await setupScreenshot()
   }
   async sleep (ms) {
     await this.page.waitFor(ms);
   }
   setUpReportDir () {
+    console.log(chalk.black.bgGreen.bold('VR Test Report'))
+    console.log('')
+
     // create dir
     fs.mkdirSync(this.outputPath)
     // create assets in output dir
@@ -117,12 +157,14 @@ module.exports = class VisualRegression {
     const diff = new PNG({ width, height })
     const diffValue = pixelmatch(reffImg.data, testImg.data, diff.data, width, height, { threshold: this.threshold })
     fs.writeFileSync(`${this.outputPath}/assets/${filename}/diff.png`, PNG.sync.write(diff))
+    console.log(`    ${chalk.green('√')} ${filename}`)
     return diffValue
   }
   compareAndReport () {
     let totalTest = 0
     let passedTest = 0
-
+    console.log('')
+    console.log(chalk.black.bgGreen.bold('VR Test Compare'))
     const render = `
       ${
       this.urlList.map(url => {

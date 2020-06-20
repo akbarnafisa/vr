@@ -50,9 +50,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.container {
-  box-shadow: $box-shadow;
-}
-</style>

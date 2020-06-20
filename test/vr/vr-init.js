@@ -6,11 +6,10 @@ const VisualRegression = require('./vr-helper');
   const Vr = new VisualRegression({
     host: 'http://127.0.0.1:8080',
     outputPath: path.resolve(__dirname, `reff-images`),
-    urlList,
   });
-
+  Vr.setUrlList(urlList)
   await Vr.init()
-  await Vr.setViewport({ width: 400, height: 700 })
+  await Vr.setViewport({ width: 1280, height: 600 })
   await Vr.screenshot()
   Vr.end()
 })();

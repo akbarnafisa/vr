@@ -10,11 +10,11 @@ const VisualRegression = require('./vr-helper');
     threshold: 0.001,
     urlList,
   });
-
+  Vr.setUrlList(urlList)
   Vr.setOutputPath('vr-report')
   Vr.setUpReportDir()
   await Vr.init()
-  await Vr.setViewport({ width: 400, height: 700 })
+  await Vr.setViewport({ width: 1280, height: 600 })
   await Vr.screenshot()
   Vr.compareAndReport()
   Vr.end()

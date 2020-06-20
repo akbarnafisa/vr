@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-  max-width: 1080px;
+  max-width: 1300px;
   margin: 0 auto;
   width: 100%;
 }
@@ -68,7 +68,7 @@ body {
   border-radius: 8px;
   flex-direction: column;
   overflow: hidden;
-  max-height: 67px;
+  max-height: 54px;
 }
 
 .list.active {
@@ -122,6 +122,10 @@ body {
   box-sizing: border-box;
 }
 
+.list__image {
+  max-width: 600px;
+}
+
 .list__image .title {
   margin-bottom: 16px;
 }
@@ -130,8 +134,12 @@ body {
   margin-left: 48px;
 }
 
+.list__image:last-of-type img {
+  width: 600px;
+}
+
 .scrubber-window {
-  width: 400px;
+  width: 600px;
   position: relative;
   display: inline-block;
   height: 100%;
@@ -150,14 +158,14 @@ body {
 }
 
 .scrubber-window .scrubber-before, .scrubber-window .scrubber-after {
-  width: 400px;
+  width: 600px;
   min-height: 700px;
   position: absolute;
   overflow: hidden;
   height: 100%;
 }
 .scrubber-window .scrubber-before div, .scrubber-window .scrubber-after div {
-  width: 400px;
+  width: 600px;
   height: 100%;
   min-height: 700px;
   overflow: hidden;
@@ -171,7 +179,7 @@ body {
 }
 .scrubber-window .scrubber-before div {
   right: 0px;
-  width: 400px;
+  width: 600px;
   background-image: url(https://unsplash.it/500/400?image=20);
 }
 .scrubber-window .scrubber-after {
@@ -179,6 +187,6 @@ body {
   position: relative
 }
 .scrubber-window .scrubber-after div {
-  width: 400px;
+  width: 600px;
   background-image: url(https://unsplash.it/500/400?image=23);
 }
