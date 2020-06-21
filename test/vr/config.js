@@ -3,28 +3,30 @@ module.exports = {
     {
       filename: 'button',
       url: 'button',
+    },
+    {
+      filename: 'color',
+      url: 'color',
       options: {
-        viewport: [{ width: 400, height: 600 }, { width: 600, height: 600 }],
-        evaluate () {
-          // this will be executed within the page, that was loaded before
-          // this will be executed within the page, that was loaded before
-          document.body.style.opacity = 0
-        },
-        waitElement: 'button',
+        fullPage: true,
       }
     },
     {
-      filename: 'card',
-      url: 'card',
-    },
-    {
-      filename: 'button',
+      filename: 'dialog',
       url: 'dialog',
       options: {
         evaluate () {
           document.querySelector('button').click()
         },
         waitElement: '.modal-container',
+      }
+    },
+    {
+      filename: 'card',
+      url: 'card',
+      options: {
+        viewport: [{ width: 575, height: 820 }, { width: 768, height: 820 }, { width: 1200, height: 961 }],
+        fullPage: true,
       }
     },
   ]
