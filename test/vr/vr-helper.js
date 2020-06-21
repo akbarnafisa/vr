@@ -40,12 +40,12 @@ const template = ({ totalTest, passedTest, render }) => {
 
 module.exports = class VisualRegression {
   constructor (option = {}) {
-    const {compareMode, host, outputPath, reffPath, urlList, threshold} = option
+    const {compareMode, host, outputPath, reffPath, threshold} = option
     this.host = host || null
     this.compareMode = compareMode || false
     this.browser = null
     this.page = null
-    this.urlList = urlList || null
+    this.urlList = null
     this.outputPath = outputPath || null
     this.reffPath = reffPath || null
     this.fixedFilename = null
@@ -96,7 +96,7 @@ module.exports = class VisualRegression {
     console.log(chalk.black.bgGreen.bold('VR Test Screenshot'))
     const capture = async (info = {}, option = {}) => {
       const {filename, outputPath, url} = info
-      const { timeout, viewport } = option
+      const {evaluate , viewport, waitElement} = option
       // apply the option viewport
       if (viewport) {
         await this.page.setViewport(viewport)
@@ -104,9 +104,13 @@ module.exports = class VisualRegression {
         this.page.setViewport(this.initViewport)
       }
       await this.page.goto(`${this.host}/${url}`)
-      // apply the option timeout
-      if (timeout) {
-        await this.sleep(timeout)
+      // apply the option evaluate
+      if (evaluate) {
+        await this.page.evaluate(evaluate)
+      }
+      // apply the option waitElement
+      if (waitElement) {
+        await this.page.waitForSelector(waitElement)
       }
       const path = `${outputPath}/${filename}.png`
       // screenshot the page
