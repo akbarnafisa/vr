@@ -2,9 +2,9 @@
   <transition name="fade">
     <div class="modal-mask" v-if="value" @click="$emit('close')">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container flex flex-center flex-column">
           <slot name="header">Header</slot>
-          <button class="modal-default-button" @click="$emit('close')">Close</button>
+          <Button type="secondary mt-32 w-100" @click="$emit('close')">Close</Button>
         </div>
       </div>
     </div>
@@ -12,7 +12,11 @@
 </template>
 
 <script>
+import Button from '@/components/Button'
 export default {
+  components: {
+    Button,
+  },
   props: {
     value: {
       type: Boolean,
@@ -46,7 +50,6 @@ export default {
   min-height: 35px;
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .2s ease;
   font-family: Helvetica, Arial, sans-serif;
 }

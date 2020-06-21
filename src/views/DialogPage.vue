@@ -1,11 +1,15 @@
 <template>
   <div>
-    <Button @click="showModal = true">Show Modal</Button>
+    <div class="container">
+      <div class="row flex flex-center">
+        <Button @click="showModal = true">Show Modal</Button>
+      </div>
+    </div>
     <Dialog
       v-model="showModal"
       @close="showModal = false"
     >
-      <span slot="header">New header</span>
+      <span slot="header">Dialog</span>
     </Dialog>
   </div>
 </template>
