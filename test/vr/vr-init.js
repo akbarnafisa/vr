@@ -9,7 +9,7 @@ const VisualRegression = require('./vr-helper');
   });
   Vr.setUrlList(urlList)
   await Vr.init()
-  await Vr.setViewport({ width: 1280, height: 600 })
+  await Vr.setViewport({ width: 1000, height: 600 })
   await Vr.screenshot()
   Vr.end()
 })();
