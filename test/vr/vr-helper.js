@@ -96,7 +96,7 @@ module.exports = class VisualRegression {
     console.log(chalk.black.bgGreen.bold('VR Test Screenshot'))
     const capture = async (info = {}, option = {}) => {
       const {filename, outputPath, url} = info
-      const {evaluate , viewport, waitElement} = option
+      const {evaluate , viewport, waitElement, fullPage} = option
       // apply the option viewport
       if (viewport) {
         await this.page.setViewport(viewport)
@@ -116,6 +116,7 @@ module.exports = class VisualRegression {
       // screenshot the page
       await this.page.screenshot({
         path: path,
+        fullPage,
       })
     }
     const setupScreenshot = async () => {
