@@ -112,7 +112,7 @@ module.exports = class VisualRegression {
       const path = `${outputPath}/${filename}.png`
       // screenshot the page
       await this.page.screenshot({
-        path,
+        path: path,
         fullPage,
       })
     }
