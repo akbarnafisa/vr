@@ -7,7 +7,6 @@ const VisualRegression = require('./vr-helper');
     compareMode: true,
     host: 'http://127.0.0.1:8080',
     reffPath: path.resolve(__dirname, `reff-images`),
-    threshold: 0.001,
   });
   Vr.setUrlList(urlList)
   Vr.setOutputPath('vr-report')

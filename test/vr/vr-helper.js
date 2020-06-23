@@ -40,7 +40,7 @@ const template = ({ totalTest, passedTest, render }) => {
 
 module.exports = class VisualRegression {
   constructor (option = {}) {
-    const {compareMode, host, outputPath, reffPath, threshold} = option
+    const {compareMode, host, outputPath, reffPath} = option
     this.host = host || null
     this.compareMode = compareMode || false
     this.browser = null
@@ -48,7 +48,6 @@ module.exports = class VisualRegression {
     this.urlList = null
     this.outputPath = outputPath || null
     this.reffPath = reffPath || null
-    this.threshold = threshold || 0.05
     this.initViewport = null
   }
 
@@ -157,7 +156,7 @@ module.exports = class VisualRegression {
     const testImg = PNG.sync.read(fs.readFileSync(`${this.outputPath}/assets/${filename}/test.png`))
     const { width, height } = reffImg
     const diff = new PNG({ width, height })
-    const diffValue = pixelmatch(reffImg.data, testImg.data, diff.data, width, height, { threshold: this.threshold })
+    const diffValue = pixelmatch(reffImg.data, testImg.data, diff.data, width, height, { threshold: 0.01 })
     fs.writeFileSync(`${this.outputPath}/assets/${filename}/diff.png`, PNG.sync.write(diff))
     console.log(`    ${chalk.green('√')} ${filename}`)
     return diffValue
