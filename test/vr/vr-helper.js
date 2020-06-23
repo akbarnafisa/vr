@@ -40,12 +40,12 @@ const template = ({ totalTest, passedTest, render }) => {
 
 module.exports = class VisualRegression {
   constructor (option = {}) {
-    const {compareMode, host, outputPath, reffPath} = option
+    const {compareMode, host, outputPath, reffPath, urlList} = option
     this.host = host || null
     this.compareMode = compareMode || false
     this.browser = null
     this.page = null
-    this.urlList = null
+    this.urlList = urlList || null
     this.outputPath = outputPath || null
     this.reffPath = reffPath || null
     this.initViewport = null
