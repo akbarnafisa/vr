@@ -48,7 +48,6 @@ module.exports = class VisualRegression {
     this.urlList = null
     this.outputPath = outputPath || null
     this.reffPath = reffPath || null
-    this.fixedFilename = null
     this.threshold = threshold || 0.05
     this.initViewport = null
   }
@@ -66,9 +65,7 @@ module.exports = class VisualRegression {
   setOutputPath (path) {
     this.outputPath = path
   }
-  setFilename (name) {
-    this.fixedFilename = name
-  }
+
   setUrlList (urlList) {
     this.urlList = urlList.flatMap(url => {
       const options = url.options || {}
