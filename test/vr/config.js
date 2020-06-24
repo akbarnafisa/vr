@@ -11,16 +11,16 @@ module.exports = {
         fullPage: true,
       }
     },
-    // {
-    //   filename: 'dialog',
-    //   url: 'dialog',
-    //   options: {
-    //     evaluate () {
-    //       document.querySelector('button').click()
-    //     },
-    //     waitElement: '.modal-container',
-    //   }
-    // },
+    {
+      filename: 'dialog',
+      url: 'dialog',
+      options: {
+        evaluate () {
+          document.querySelector('button').click()
+        },
+        waitElement: '.modal-container',
+      }
+    },
     // {
     //   filename: 'card',
     //   url: 'card',

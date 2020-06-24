@@ -68,7 +68,7 @@ body {
   border-radius: 8px;
   flex-direction: column;
   overflow: hidden;
-  max-height: 54px;
+  max-height: 68px;
 }
 
 .list.active {
@@ -83,6 +83,7 @@ body {
   cursor: pointer;
   padding: 12px 24px;
   box-sizing: border-box;
+  min-height: 68px;
 }
 
 .list__title {

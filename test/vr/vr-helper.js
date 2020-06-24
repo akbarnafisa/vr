@@ -133,98 +133,98 @@ module.exports = class VisualRegression {
   async sleep (ms) {
     await this.page.waitFor(ms);
   }
-  // setUpReportDir () {
-  //   console.log(chalk.black.bgGreen.bold('VR Test Report'))
-  //   console.log('')
+  setUpReportDir () {
+    console.log(chalk.black.bgGreen.bold('VR Test Report'))
+    console.log('')
 
-  //   /*
-  //   * vr-report/
-  //   *   assets/
-  //   *     button/
-  //   *       reff.png
-  //   *     color/
-  //   *       reff.png
-  //   */
+    /*
+    * vr-report/
+    *   assets/
+    *     button/
+    *       reff.png
+    *     color/
+    *       reff.png
+    */
 
-  //   // create dir
-  //   fs.mkdirSync(this.outputPath)
-  //   // create assets in output dir
-  //   fs.mkdirSync(`${this.outputPath}/assets`)
-  //   this.urlList.forEach(url => {
-  //     fs.mkdirSync(`${this.outputPath}/assets/${url.filename}`)
-  //     const source = `${this.reffPath}/${url.filename}.png`
-  //     const target = `${this.outputPath}/assets/${url.filename}/reff.png`
-  //     // copy reference to output path
-  //     fs.copyFileSync(source, target)
-  //   })
-  // }
-  // compareImage (filename) {
-  //   const reffImg = PNG.sync.read(fs.readFileSync(`${this.outputPath}/assets/${filename}/reff.png`))
-  //   const testImg = PNG.sync.read(fs.readFileSync(`${this.outputPath}/assets/${filename}/test.png`))
-  //   const { width, height } = reffImg
-  //   const diff = new PNG({ width, height })
-  //   const diffValue = pixelmatch(reffImg.data, testImg.data, diff.data, width, height, { threshold: 0.01 })
-  //   fs.writeFileSync(`${this.outputPath}/assets/${filename}/diff.png`, PNG.sync.write(diff))
-  //   console.log(`    ${chalk.green('√')} ${filename}`)
-  //   return diffValue
-  // }
-  // compareAndReport () {
-  //   let totalTest = 0
-  //   let passedTest = 0
-  //   console.log('')
-  //   console.log(chalk.black.bgGreen.bold('VR Test Compare'))
-  //   const render = `
-  //     ${
-  //     this.urlList.map(url => {
-  //       const filename = url.filename
-  //       const diffValue = this.compareImage(filename)
-  //       totalTest += 1
-  //       passedTest = diffValue === 0 ? passedTest += 1 : passedTest
-  //       return `
-  //             <div class="list">
-  //               <div class="list__header">
-  //                 <div class="list__title title">
-  //                   ${filename}
-  //                   <div class="list__diff body ${diffValue ? `differ` : null}">
-  //                     ${diffValue ? `Alert!` : ''}
-  //                   </div>
-  //                 </div>
-  //                 <div class="list__arrow ${diffValue ? `differ` : 0}"></div>
-  //               </div>
-  //               <div class="list__image-wrapper">
-  //                 <div class="list__image">
-  //                   <div class="title">REFF / TEST</div>
-  //                   <div class='scrubber-window'>
-  //                     <div class='scrubber-bar'>
-  //                     </div>
-  //                     <div class='scrubber-before'>
-  //                       <div style="background-image: url(assets/${filename}/reff.png)"></div>
-  //                     </div>
-  //                     <div class='scrubber-after'>
-  //                       <div style="background-image: url(assets/${filename}/test.png)"></div>
-  //                     </div>
-  //                   </div>
-  //                 </div>
-  //                 <div class="list__image">
-  //                   <div class="title">DIFF</div>
-  //                   <img src="assets/${filename}/diff.png" />
-  //                 </div>
-  //               </div>
-  //             </div>
-  //           `
-  //     }).join(" ")
-  //     }
-  //   `
-  //   const dataToRender = {
-  //     totalTest,
-  //     passedTest,
-  //     render,
-  //   }
+    // create dir
+    fs.mkdirSync(this.outputPath)
+    // create assets in output dir
+    fs.mkdirSync(`${this.outputPath}/assets`)
+    this.urlList.forEach(url => {
+      fs.mkdirSync(`${this.outputPath}/assets/${url.filename}`)
+      const source = `${this.reffPath}/${url.filename}.png`
+      const target = `${this.outputPath}/assets/${url.filename}/reff.png`
+      // copy reference to output path
+      fs.copyFileSync(source, target)
+    })
+  }
+  compareImage (filename) {
+    const reffImg = PNG.sync.read(fs.readFileSync(`${this.outputPath}/assets/${filename}/reff.png`))
+    const testImg = PNG.sync.read(fs.readFileSync(`${this.outputPath}/assets/${filename}/test.png`))
+    const { width, height } = reffImg
+    const diff = new PNG({ width, height })
+    const diffValue = pixelmatch(reffImg.data, testImg.data, diff.data, width, height, { threshold: 0.01 })
+    fs.writeFileSync(`${this.outputPath}/assets/${filename}/diff.png`, PNG.sync.write(diff))
+    console.log(`    ${chalk.green('√')} ${filename}`)
+    return diffValue
+  }
+  compareAndReport () {
+    let totalTest = 0
+    let passedTest = 0
+    console.log('')
+    console.log(chalk.black.bgGreen.bold('VR Test Compare'))
+    const render = `
+      ${
+      this.urlList.map(url => {
+        const filename = url.filename
+        const diffValue = this.compareImage(filename)
+        totalTest += 1
+        passedTest = diffValue === 0 ? passedTest += 1 : passedTest
+        return `
+              <div class="list">
+                <div class="list__header">
+                  <div class="list__title title">
+                    ${filename}
+                    <div class="list__diff body ${diffValue ? `differ` : null}">
+                      ${diffValue ? `Alert!` : ''}
+                    </div>
+                  </div>
+                  <div class="list__arrow ${diffValue ? `differ` : 0}"></div>
+                </div>
+                <div class="list__image-wrapper">
+                  <div class="list__image">
+                    <div class="title">REFF / TEST</div>
+                    <div class='scrubber-window'>
+                      <div class='scrubber-bar'>
+                      </div>
+                      <div class='scrubber-before'>
+                        <div style="background-image: url(assets/${filename}/reff.png)"></div>
+                      </div>
+                      <div class='scrubber-after'>
+                        <div style="background-image: url(assets/${filename}/test.png)"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list__image">
+                    <div class="title">DIFF</div>
+                    <img src="assets/${filename}/diff.png" />
+                  </div>
+                </div>
+              </div>
+            `
+      }).join(" ")
+      }
+    `
+    const dataToRender = {
+      totalTest,
+      passedTest,
+      render,
+    }
 
-  //   fs.copyFileSync(path.resolve(__dirname, 'templates/main.css'), `${this.outputPath}/main.css`)
-  //   fs.copyFileSync(path.resolve(__dirname, 'templates/main.js'), `${this.outputPath}/main.js`)
-  //   fs.writeFileSync(`${this.outputPath}/index.html`, template(dataToRender))
-  // }
+    fs.copyFileSync(path.resolve(__dirname, 'templates/main.css'), `${this.outputPath}/main.css`)
+    fs.copyFileSync(path.resolve(__dirname, 'templates/main.js'), `${this.outputPath}/main.js`)
+    fs.writeFileSync(`${this.outputPath}/index.html`, template(dataToRender))
+  }
   end () {
     process.exit()
   }
