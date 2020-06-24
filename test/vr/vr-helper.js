@@ -61,9 +61,6 @@ module.exports = class VisualRegression {
     this.initViewport = viewport
     await this.page.setViewport(viewport)
   }
-  setOutputPath (path) {
-    this.outputPath = path
-  }
 
   // setUrlList (urlList) {
   //   this.urlList = urlList.flatMap(url => {
@@ -112,7 +109,7 @@ module.exports = class VisualRegression {
       const path = `${outputPath}/${filename}.png`
       // screenshot the page
       await this.page.screenshot({
-        path: path,
+        path,
         fullPage,
       })
     }
@@ -139,6 +136,15 @@ module.exports = class VisualRegression {
   // setUpReportDir () {
   //   console.log(chalk.black.bgGreen.bold('VR Test Report'))
   //   console.log('')
+
+  //   /*
+  //   * vr-report/
+  //   *   assets/
+  //   *     button/
+  //   *       reff.png
+  //   *     color/
+  //   *       reff.png
+  //   */
 
   //   // create dir
   //   fs.mkdirSync(this.outputPath)
