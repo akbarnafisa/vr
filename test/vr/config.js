@@ -19,7 +19,6 @@ module.exports = {
           document.querySelector('button').click()
         },
         waitElement: '.modal-container',
-        // sleep: 1000,
       }
     },
     // {
