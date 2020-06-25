@@ -66,6 +66,40 @@ module.exports = class VisualRegression {
   }
 
   setUrlList (urlList) {
+    /**
+     * format array url list if there is viewport option
+   * @example
+   * setUrlList([{
+        filename: 'card',
+        url: 'card',
+        options: {
+          viewport: [{ width: 575, height: 820 }, { width: 768, height: 820 }],
+          fullPage: true,
+        }
+      }])
+      will return -->
+      [{
+        filename: 'card-575x820',
+        url: 'card',
+        options: {
+          viewport: { width: 575, height: 820 },
+          fullPage: true,
+        }
+      },
+      {
+        filename: 'card-768x820',
+        url: 'card',
+        options: {
+          viewport: { width: 768, height: 820 },
+          fullPage: true,
+        }
+      }]
+
+   * @function
+   * @param urlList {array}
+   * @return {array}
+   */
+
     this.urlList = urlList.flatMap(url => {
       const options = url.options || {}
       const viewport = options.viewport || []
@@ -107,6 +141,10 @@ module.exports = class VisualRegression {
       // apply the option waitElement
       if (waitElement) {
         await this.page.waitForSelector(waitElement)
+      }
+      // apply the option waitElement
+      if (sleep) {
+        await this.sleep(sleep)
       }
       const path = `${outputPath}/${filename}.png`
       // screenshot the page
