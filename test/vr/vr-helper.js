@@ -70,7 +70,7 @@ module.exports = class VisualRegression {
         filename: 'card',
         url: 'card',
         options: {
-          viewport: [{ width: 575, height: 820 }, { width: 768, height: 820 }],
+          viewport: [{ width: 575, height: 820 }, { width: 768, height: 820 } , { width: 1200, height: 820 }],
           fullPage: true,
         }
       }])
@@ -89,7 +89,15 @@ module.exports = class VisualRegression {
         options: {
           viewport: { width: 768, height: 820 },
           fullPage: true,
-        }
+        },
+        {
+        filename: 'card-1200x820',
+        url: 'card',
+        options: {
+          viewport: { width: 1200, height: 820 },
+          fullPage: true,
+        },
+
       }]
 
    * @function
