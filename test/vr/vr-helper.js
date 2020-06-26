@@ -62,63 +62,63 @@ module.exports = class VisualRegression {
     await this.page.setViewport(viewport)
   }
 
-  // setUrlList (urlList) {
-  //   /**
-  //    * format array url list if there is viewport option
-  //  * @example
-  //  * setUrlList([{
-  //       filename: 'card',
-  //       url: 'card',
-  //       options: {
-  //         viewport: [{ width: 575, height: 820 }, { width: 768, height: 820 }],
-  //         fullPage: true,
-  //       }
-  //     }])
-  //     will return -->
-  //     [{
-  //       filename: 'card-575x820',
-  //       url: 'card',
-  //       options: {
-  //         viewport: { width: 575, height: 820 },
-  //         fullPage: true,
-  //       }
-  //     },
-  //     {
-  //       filename: 'card-768x820',
-  //       url: 'card',
-  //       options: {
-  //         viewport: { width: 768, height: 820 },
-  //         fullPage: true,
-  //       }
-  //     }]
+  setUrlList (urlList) {
+    /**
+     * format array url list if there is viewport option
+   * @example
+   * setUrlList([{
+        filename: 'card',
+        url: 'card',
+        options: {
+          viewport: [{ width: 575, height: 820 }, { width: 768, height: 820 }],
+          fullPage: true,
+        }
+      }])
+      will return -->
+      [{
+        filename: 'card-575x820',
+        url: 'card',
+        options: {
+          viewport: { width: 575, height: 820 },
+          fullPage: true,
+        }
+      },
+      {
+        filename: 'card-768x820',
+        url: 'card',
+        options: {
+          viewport: { width: 768, height: 820 },
+          fullPage: true,
+        }
+      }]
 
-  //  * @function
-  //  * @param urlList {array}
-  //  * @return {array}
-  //  */
+   * @function
+   * @param urlList {array}
+   * @return {array}
+   */
 
-  //   this.urlList = urlList.flatMap(url => {
-  //     const options = url.options || {}
-  //     const viewport = options.viewport || []
-  //     if (viewport.length === 0) return url
+    this.urlList = urlList.flatMap(url => {
+      const options = url.options || {}
+      const viewport = options.viewport || []
+      if (viewport.length === 0) return url
 
-  //     let _url = []
-  //     let counter = 0
-  //     while (counter < viewport.length) {
-  //       const { width, height } = viewport[counter]
-  //       _url.push({
-  //         ...url,
-  //         filename: `${url.filename}-${width}x${height}`,
-  //         options: {
-  //           ...url.options,
-  //           viewport: viewport[counter],
-  //         }
-  //       })
-  //       counter += 1
-  //     }
-  //     return [..._url]
-  //   })
-  // }
+      let _url = []
+      let counter = 0
+      while (counter < viewport.length) {
+        const { width, height } = viewport[counter]
+        _url.push({
+          ...url,
+          filename: `${url.filename}-${width}x${height}`,
+          options: {
+            ...url.options,
+            viewport: viewport[counter],
+          }
+        })
+        counter += 1
+      }
+      return [..._url]
+    })
+  }
 
   async screenshot () {
     console.log(chalk.black.bgGreen.bold('VR Test Screenshot'))
@@ -126,11 +126,11 @@ module.exports = class VisualRegression {
       const {filename, outputPath, url} = info
       const {evaluate , viewport, waitElement, fullPage, sleep} = option
       // apply the option viewport
-      // if (viewport) {
-      //   await this.page.setViewport(viewport)
-      // } else {
-      //   this.page.setViewport(this.initViewport)
-      // }
+      if (viewport) {
+        await this.page.setViewport(viewport)
+      } else {
+        this.page.setViewport(this.initViewport)
+      }
       await this.page.goto(`${this.host}/${url}`)
       // apply the option evaluate
       if (evaluate) {

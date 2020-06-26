@@ -9,7 +9,7 @@ const VisualRegression = require('./vr-helper');
     reffPath: path.resolve(__dirname, `reff-images`),
     outputPath: 'vr-report',
   });
-  // Vr.setUrlList(urlList)
+  Vr.setUrlList(urlList)
   Vr.setUpReportDir()
   await Vr.init()
   await Vr.setViewport({ width: 1000, height: 600 })
