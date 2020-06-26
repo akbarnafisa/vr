@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="row flex flex-center">
-        <Button @click="showModal = true">Show Modal</Button>
+        <Button @click="showModal = true">Show Dialog</Button>
       </div>
     </div>
     <Dialog
